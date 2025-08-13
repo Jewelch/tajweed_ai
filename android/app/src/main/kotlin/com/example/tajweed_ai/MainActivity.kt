@@ -1,4 +1,4 @@
-package com.example.tajweed_ai
+package com.nomow.tajweedai
 
 import io.flutter.embedding.android.FlutterActivity
 
