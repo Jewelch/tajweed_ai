@@ -1,0 +1,1 @@
+xcrun simctl push booted com.rides2u.rides2u push_notifications/default_push.json
