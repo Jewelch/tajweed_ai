@@ -48,7 +48,7 @@ abstract class BlocProviderWidget<B extends BaseBloc> extends StatefulWidget {
     super.key,
     this.dependencies,
     this.lazy = true,
-    this.listenWhen,
+    this.updateWhen,
     this.onUpdate,
     this.fullRebuildWhen,
     this.debugStateChanges = false,
@@ -61,7 +61,7 @@ abstract class BlocProviderWidget<B extends BaseBloc> extends StatefulWidget {
 
   /// A function that determines when to rebuild the widget based on the previous and current state.
   /// If `null`, the widget will rebuild on every state change.
-  final BlocBuilderCondition<dynamic>? listenWhen;
+  final BlocBuilderCondition<dynamic>? updateWhen;
 
   final void Function(BuildContext, dynamic)? onUpdate;
   final bool Function(BuildContext, dynamic)? fullRebuildWhen;
@@ -118,7 +118,7 @@ class _State<T extends BlocProviderWidget, B extends BaseBloc> extends State<T> 
     create: (_) => bloc,
     lazy: widget.lazy,
     child: BlocListener<B, dynamic>(
-      listenWhen: widget.listenWhen,
+      listenWhen: widget.updateWhen,
       listener: (context, state) {
         setState.execute(
           () => () {

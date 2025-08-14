@@ -9,7 +9,10 @@ sealed class ShiftHandoverState extends Equatable {
 
 final class Loading extends ShiftHandoverState {}
 
-final class Empty extends ShiftHandoverState {}
+final class Empty extends ShiftHandoverState {
+  @override
+  List<Object> get props => [];
+}
 
 final class Success extends ShiftHandoverState {
   final ShiftReportDO shiftReport;

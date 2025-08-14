@@ -24,7 +24,7 @@ final class ShiftHandoverDataSourceImpl extends RequestPerformer
 
   @override
   FutureRequestResult<ShiftReportDO> getShiftReport(String caregiverId) async => true
-      ? Right(ShiftReportDO.empty())
+      ? Future.delayed(const Duration(milliseconds: 500), () => Right(ShiftReportDO.empty()))
       : _connectivityMonitor.isConnected
       ? await performDecodingRequest(
           decodableModel: ShiftReportDO.empty(),
@@ -34,5 +34,8 @@ final class ShiftHandoverDataSourceImpl extends RequestPerformer
           mockIt: true,
           simulateFailure: false,
         )
-      : Left(Exception('No internet connection'));
+      : Future.delayed(
+          const Duration(milliseconds: 500),
+          () => Left(Exception('No internet connection')),
+        );
 }

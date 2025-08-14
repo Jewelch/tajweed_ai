@@ -17,8 +17,7 @@ final class ShiftHandoverScreen extends BlocProviderWidget<ShiftHandoverBloc> {
         dependencies: ShiftHandoverDependencies(),
         debugStateChanges: true,
         fullRebuildWhen: (_, currentState) => false,
-        listenWhen: (previous, current) =>
-            current is Success || current is Error || current is Empty,
+        updateWhen: (previous, current) => current is! Loading,
         onUpdate: (context, state) => switch (state) {
           Empty() => appMessenger.showSnackBar(
             WarningSnackbar(message: "No shift report found", context: context),
