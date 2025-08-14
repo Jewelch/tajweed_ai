@@ -7,7 +7,7 @@ import 'exports.dart';
 ///
 /// Example:
 /// ```dart
-/// class LoginScreen extends BlocProviderWidget<LoginBloc> {
+/// class LoginScreen extends Feature<LoginBloc> {
 ///   ProductDetailsScreenEnum({super.key})
 ///      :  super(
 ///           dependencies: ProductScreenDependencies(),
@@ -37,14 +37,14 @@ import 'exports.dart';
 /// - `EmptyWidget`: A widget displayed when the state is empty.
 /// - `SuccessWidget`: A widget displayed when the state is successful, typically containing a list of products.
 /// - [dependencies] allows dependency injection
-abstract class BlocProviderWidget<B extends BaseBloc> extends StatefulWidget {
-  /// Creates a [BlocProviderWidget].
+abstract class Feature<B extends BaseBloc> extends StatefulWidget {
+  /// Creates a [Feature].
   ///
   /// - [dependencies]: Optional. A [Dependencies] instance for lazy or eager dependency injection.
   /// - [lazy]: Whether to create the [Bloc] lazily or eagerly. Defaults to `true` (lazy).
   /// - [buildWhen]: Optional. A function that decides when to rebuild the widget based on the previous
   /// and current state of the [Bloc].
-  BlocProviderWidget({
+  Feature({
     super.key,
     this.dependencies,
     this.lazy = true,
@@ -76,10 +76,10 @@ abstract class BlocProviderWidget<B extends BaseBloc> extends StatefulWidget {
   /// The [Bloc] provided to the widget.
   B get bloc => _state!.bloc;
 
-  _State<BlocProviderWidget, B>? _state;
+  _State<Feature, B>? _state;
 
   @override
-  createState() => _State<BlocProviderWidget, B>();
+  createState() => _State<Feature, B>();
 
   /// Builds the widget's UI based on the current [BuildContext].
   /// You must implement this in subclasses to define the widget's content.
@@ -87,7 +87,7 @@ abstract class BlocProviderWidget<B extends BaseBloc> extends StatefulWidget {
   Widget build(BuildContext context);
 }
 
-class _State<T extends BlocProviderWidget, B extends BaseBloc> extends State<T> {
+class _State<T extends Feature, B extends BaseBloc> extends State<T> {
   late final B bloc; // Ensures bloc persists
 
   @override

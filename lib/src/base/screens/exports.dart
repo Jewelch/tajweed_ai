@@ -10,5 +10,5 @@ export '../../app/router/app_messenger.dart' show appMessenger;
 export '../../app/router/app_router.dart' show globalContext;
 export '../../features/common/widgets/index.dart';
 export '../extensions/index.dart';
-export './bloc_provider_widget.dart';
 export './dependency_injection_widget.dart';
+export 'feature.dart';

@@ -61,7 +61,7 @@ class NoteAddingDependencies implements Dependencies {
   }
 }
 
-class _NoteAddingButton extends BlocProviderWidget<NoteAddingBloc> {
+class _NoteAddingButton extends Feature<NoteAddingBloc> {
   _NoteAddingButton() : super(dependencies: NoteAddingDependencies());
 
   @override

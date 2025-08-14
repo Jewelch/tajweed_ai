@@ -9,7 +9,7 @@ import '../widgets/loading_widget.dart';
 import '../widgets/report_view_widget.dart';
 import '../widgets/shift_handover_app_bar.dart';
 
-final class ShiftHandoverScreen extends BlocProviderWidget<ShiftHandoverBloc> {
+final class ShiftHandoverScreen extends Feature<ShiftHandoverBloc> {
   static final path = "/shift-handover";
 
   ShiftHandoverScreen({super.key})
@@ -30,8 +30,6 @@ final class ShiftHandoverScreen extends BlocProviderWidget<ShiftHandoverBloc> {
 
   @override
   Widget build(BuildContext context) {
-    Debugger.black('ShiftHandoverScreen rebuilt');
-
     return Scaffold(
       appBar: const ShiftHandoverAppBar(),
       body: BlocBuilder<ShiftHandoverBloc, ShiftHandoverState>(
