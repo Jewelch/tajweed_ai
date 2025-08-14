@@ -3,7 +3,7 @@ import '../../bloc/events/shift_handover_events.dart';
 import '../../bloc/shift_handover_bloc.dart';
 
 class FailureSnackbar extends CommonSnackbar {
-  FailureSnackbar({required super.context, required super.message})
+  FailureSnackbar({required BuildContext context, required super.message})
     : super(
         type: SnackbarType.error,
         actionTitle: 'Retry',

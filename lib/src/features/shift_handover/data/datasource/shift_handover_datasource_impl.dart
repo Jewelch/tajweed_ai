@@ -23,19 +23,21 @@ final class ShiftHandoverDataSourceImpl extends RequestPerformer
        super(client);
 
   @override
-  FutureRequestResult<ShiftReportDO> getShiftReport(String caregiverId) async => true
-      ? Future.delayed(const Duration(milliseconds: 500), () => Right(ShiftReportDO.empty()))
-      : _connectivityMonitor.isConnected
-      ? await performDecodingRequest(
-          decodableModel: ShiftReportDO.empty(),
-          method: RestfulMethods.get,
-          path: "${ShiftHandoverDataSource.endpoint}/$caregiverId",
-          mockingData: _mockShiftReport(notesCount: AppEnvironment.testing ? 1 : 5),
-          mockIt: true,
-          simulateFailure: false,
-        )
-      : Future.delayed(
-          const Duration(milliseconds: 500),
-          () => Left(Exception('No internet connection')),
-        );
+  FutureRequestResult<ShiftReportDO> getShiftReport(String caregiverId) async {
+    return false
+        ? Future.delayed(const Duration(milliseconds: 500), () => Right(ShiftReportDO.empty()))
+        : _connectivityMonitor.isConnected
+        ? await performDecodingRequest(
+            decodableModel: ShiftReportDO.empty(),
+            method: RestfulMethods.get,
+            path: "${ShiftHandoverDataSource.endpoint}/$caregiverId",
+            mockingData: _mockShiftReport(notesCount: AppEnvironment.testing ? 1 : 5),
+            mockIt: true,
+            simulateFailure: false,
+          )
+        : Future.delayed(
+            const Duration(milliseconds: 500),
+            () => Left(Exception('No internet connection')),
+          );
+  }
 }

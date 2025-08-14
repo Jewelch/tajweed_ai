@@ -13,6 +13,8 @@ void main() => runZonedGuarded(() async {
 
   AppEnvironment.setupEnvironment(Environment.dev);
 
+  ConnectivityPlus.init();
+
   RequesterConfig.configure();
 
   runApp(
