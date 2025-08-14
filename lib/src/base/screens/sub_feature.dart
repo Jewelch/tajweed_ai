@@ -85,7 +85,7 @@ abstract class SubFeature<B extends BaseBloc<dynamic, S>, S> extends StatefulWid
   Widget build(BuildContext context, S state);
 }
 
-class _State<B extends BaseBloc<dynamic, S>, S> extends State<SubFeature> {
+class _State<B extends BaseBloc<dynamic, S>, S> extends State<SubFeature<B, S>> {
   late final B bloc; // Ensures bloc persists
 
   @override
@@ -98,7 +98,7 @@ class _State<B extends BaseBloc<dynamic, S>, S> extends State<SubFeature> {
   }
 
   @override
-  void didUpdateWidget(covariant SubFeature oldWidget) {
+  void didUpdateWidget(covariant SubFeature<B, S> oldWidget) {
     super.didUpdateWidget(oldWidget);
     widget._state = this;
   }
@@ -115,7 +115,7 @@ class _State<B extends BaseBloc<dynamic, S>, S> extends State<SubFeature> {
   Widget build(BuildContext context) => BlocConsumer<B, S>(
     bloc: bloc,
     builder: widget.build,
-    listener: (context, state) => BlocListener<B, dynamic>(
+    listener: (context, state) => BlocListener<B, S>(
       listenWhen: widget.updateWhen,
       listener: (context, state) {
         setState.execute(
