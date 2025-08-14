@@ -17,19 +17,6 @@ final class GetShiftReport extends ShiftHandoverEvent {
   List<Object> get props => [caregiverId];
 }
 
-//- ANOTHER EVENTS
-final class GetAnotherEvent extends ShiftHandoverEvent {
-  const GetAnotherEvent();
-
-  @override
-  List<Object> get props => [];
-}
-
-//- ADD NOTE
-final class AddShiftNote extends ShiftHandoverEvent {
-  const AddShiftNote();
-}
-
 //- ACCESS HOME
 final class AccessHome extends ShiftHandoverEvent {
   const AccessHome();

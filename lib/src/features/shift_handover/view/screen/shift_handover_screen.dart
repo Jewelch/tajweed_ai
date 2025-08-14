@@ -13,7 +13,7 @@ final class ShiftHandoverScreen extends Feature<ShiftHandoverBloc, ShiftHandover
 
   ShiftHandoverScreen({super.key})
     : super(
-        dependencies: ShiftHandoverDependencies(),
+        dependencies: ShiftHandoverDependencies().inject,
         // debugStateChanges: true,
         // fullRebuildWhen: (_, currentState) => false,
         // updateWhen: (previous, current) => current is! Loading,

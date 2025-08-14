@@ -1,7 +1,6 @@
 import '../../../../base/screens/exports.dart';
 import '../../data/models/shift_report_do.dart';
 import '../../vm/bloc/shift_handover_bloc.dart';
-import '../../vm/events/shift_handover_events.dart';
 import 'note_adding/view/add_note_button.dart';
 import 'note_card.dart';
 
@@ -44,12 +43,12 @@ class _AccessHomeButton extends SubWidget<ShiftHandoverBloc> {
   @override
   Widget build(BuildContext context) {
     return Observer(
-      observes: bloc.isLoadingObs,
+      observes: bloc.accessingHomeObs,
       builder: (context, isLoading) => LoadingButton(
         isLoading: isLoading,
         title: 'Access Home',
         titleFontSize: AppStyles.title.fontSize,
-        onTap: () => bloc.add(const AccessHome()),
+        onTap: bloc.accessHome,
       ),
     );
   }

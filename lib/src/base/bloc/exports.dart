@@ -1,4 +1,13 @@
-export 'package:cg_core_defs/cg_core_defs.dart' show Observable;
+export 'package:cg_core_defs/cg_core_defs.dart'
+    show
+        Observable,
+        ObservableBoolExt,
+        ObservablOptionaleBoolExt,
+        ObservableListExt,
+        ObservableSetExt,
+        ObsIfDifferentOptionalUpdater,
+        ObsIfDifferentUpdater,
+        OptionalObservableExt;
 export 'package:cg_core_defs/helpers/debugging_printer.dart';
 export 'package:flutter/material.dart' show ScaffoldMessenger, Theme, Scaffold, showDialog;
 export 'package:flutter/widgets.dart' show TextEditingController, FocusNode;

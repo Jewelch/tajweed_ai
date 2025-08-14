@@ -15,7 +15,7 @@ class NoteAddingBloc extends BaseBloc<NoteAddingEvent, NoteAddingState> {
   void _addNote(AddNote event, Emitter<NoteAddingState> emit) async {
     emit(Loading());
 
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 3));
 
     emit(NoteAdded());
   }

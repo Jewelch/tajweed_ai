@@ -54,7 +54,7 @@ abstract class Feature<B extends BaseBloc<dynamic, S>, S> extends StatefulWidget
     this.debugStateChanges = false,
   });
 
-  final Dependencies? dependencies;
+  final VoidCallback? dependencies;
 
   /// Whether to create the [Bloc] lazily or eagerly. Defaults to `true`.
   final bool lazy;
@@ -91,7 +91,7 @@ class _State<B extends BaseBloc<dynamic, S>, S> extends State<Feature<B, S>> {
   void initState() {
     super.initState();
     widget._state = this;
-    widget.dependencies?.inject();
+    widget.dependencies?.call();
     bloc = get<B>(); // Initialize bloc only once
   }
 
