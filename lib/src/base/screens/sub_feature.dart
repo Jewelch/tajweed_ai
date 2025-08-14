@@ -112,11 +112,10 @@ class _State<B extends BaseBloc<dynamic, S>, S> extends State<SubFeature<B, S>> 
 
   @override
   @protected
-  Widget build(BuildContext context) => BlocConsumer<B, S>(
-    bloc: bloc,
-    builder: widget.build,
-    listener: (context, state) => BlocListener<B, S>(
-      listenWhen: widget.updateWhen,
+  Widget build(BuildContext context) => BlocProvider<B>.value(
+    value: bloc,
+    child: BlocConsumer<B, S>(
+      builder: widget.build,
       listener: (context, state) {
         setState.execute(
           () => () {
