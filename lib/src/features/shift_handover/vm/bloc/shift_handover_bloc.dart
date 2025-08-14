@@ -25,10 +25,4 @@ class ShiftHandoverBloc extends BaseBloc<ShiftHandoverEvent, ShiftHandoverState>
     add(GetShiftReport('current-user-id'));
     super.onReady();
   }
-
-  //? SUB USE CASES
-
-  //? ACCESS HOME
-  static const _accessHomeEvent = AccessHome();
-  void accessHome() => add(_accessHomeEvent);
 }
