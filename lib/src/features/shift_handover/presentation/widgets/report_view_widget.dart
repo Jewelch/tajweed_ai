@@ -1,11 +1,11 @@
 import '../../../../base/screens/exports.dart';
-import '../../data/models/shift_report_model.dart';
+import '../../data/models/shift_report_do.dart';
 import 'note_card.dart';
 
 final class ReportViewWidget extends StatelessWidget {
   const ReportViewWidget(this.report, {super.key});
 
-  final ShiftReportDATO report;
+  final ShiftReportDO report;
 
   @override
   Widget build(BuildContext context) => Column(

@@ -12,6 +12,6 @@ extension on ShiftHandoverBloc {
     emit(Error.from(exception));
   }
 
-  void _handleAnotherEventSuccess(ShiftReportDATO? shiftReport, Emitter<ShiftHandoverState> emit) =>
+  void _handleAnotherEventSuccess(ShiftReportDO? shiftReport, Emitter<ShiftHandoverState> emit) =>
       (shiftReport == null) ? emit(Empty()) : emit(Success(shiftReport: shiftReport));
 }

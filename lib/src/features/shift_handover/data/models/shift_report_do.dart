@@ -2,7 +2,7 @@ import 'package:generic_requester/generic_requester.dart';
 
 import 'handover_note.dart';
 
-final class ShiftReportDATO extends ModelingProtocol {
+final class ShiftReportDO extends ModelingProtocol {
   final String id;
   final String caregiverId;
   final String startTime;
@@ -11,7 +11,7 @@ final class ShiftReportDATO extends ModelingProtocol {
   final String summary;
   final bool? isSubmitted;
 
-  const ShiftReportDATO({
+  const ShiftReportDO({
     required this.id,
     required this.caregiverId,
     required this.startTime,
@@ -21,7 +21,7 @@ final class ShiftReportDATO extends ModelingProtocol {
     required this.notes,
   });
 
-  factory ShiftReportDATO.empty() => const ShiftReportDATO(
+  factory ShiftReportDO.empty() => const ShiftReportDO(
     id: '',
     caregiverId: '',
     startTime: '',
@@ -32,18 +32,16 @@ final class ShiftReportDATO extends ModelingProtocol {
   );
 
   @override
-  ShiftReportDATO fromJson(json) {
+  ShiftReportDO fromJson(json) {
     try {
-      return ShiftReportDATO(
+      return ShiftReportDO(
         id: json?['id'] ?? '',
         caregiverId: json?['caregiverId'] ?? '',
         startTime: json?['startTime'] ?? '',
         endTime: json?['endTime'] ?? '',
         summary: json?['summary'] ?? '',
         isSubmitted: json?['isSubmitted'] ?? false,
-        notes: ((json['notes'] ?? const []) as List<dynamic>)
-            .map((e) => HandoverNote.from(e))
-            .toList(),
+        notes: (json?['notes'] as List<dynamic>?)?.map((e) => HandoverNote.from(e)).toList() ?? [],
       );
     } catch (e, s) {
       throw JsonParsingException(e, s);

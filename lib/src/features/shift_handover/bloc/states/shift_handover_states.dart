@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../data/models/shift_report_model.dart';
+import '../../data/models/shift_report_do.dart';
 
 sealed class ShiftHandoverState extends Equatable {
   @override
@@ -12,7 +12,7 @@ final class Loading extends ShiftHandoverState {}
 final class Empty extends ShiftHandoverState {}
 
 final class Success extends ShiftHandoverState {
-  final ShiftReportDATO shiftReport;
+  final ShiftReportDO shiftReport;
 
   Success({required this.shiftReport});
 

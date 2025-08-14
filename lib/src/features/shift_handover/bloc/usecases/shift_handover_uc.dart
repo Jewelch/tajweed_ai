@@ -10,7 +10,7 @@ extension on ShiftHandoverBloc {
         .then(
           (result) => result.fold(
             (exception) => _handleShiftHandoverFailure(exception, emit),
-            (ShiftReportDATO shiftReport) => _handleLoadShiftReport(shiftReport, emit),
+            (ShiftReportDO shiftReport) => _handleLoadShiftReport(shiftReport, emit),
           ),
         );
   }
@@ -20,6 +20,6 @@ extension on ShiftHandoverBloc {
     emit(Error.from(exception));
   }
 
-  void _handleLoadShiftReport(ShiftReportDATO? shiftReport, Emitter<ShiftHandoverState> emit) =>
+  void _handleLoadShiftReport(ShiftReportDO? shiftReport, Emitter<ShiftHandoverState> emit) =>
       (shiftReport == null) ? emit(Empty()) : emit(Success(shiftReport: shiftReport));
 }
