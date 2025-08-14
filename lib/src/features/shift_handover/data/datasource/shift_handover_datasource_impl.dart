@@ -1,6 +1,7 @@
 // ignore_for_file: dead_code
 
 import '../../../../core/api/requester_config.dart';
+import '../enums/note_type.dart';
 import '../models/shift_report_model.dart';
 
 part '../mock/shift_handover_mock.dart';

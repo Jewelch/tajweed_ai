@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import '../../../../base/helpers/timestamp_helper.dart';
+import '../enums/note_type.dart';
 
 base class HandoverNote extends Equatable {
   final String id;
@@ -8,6 +9,7 @@ base class HandoverNote extends Equatable {
   final DateTime timestamp;
   final String authorId;
   final bool isAcknowledged;
+  final NoteType type;
 
   bool get isEmpty => text.isEmpty;
 
@@ -17,6 +19,7 @@ base class HandoverNote extends Equatable {
     required this.timestamp,
     required this.authorId,
     required this.isAcknowledged,
+    required this.type,
   });
 
   factory HandoverNote.acknowledged(HandoverNote note) => note.copyWith(isAcknowledged: true);
@@ -27,6 +30,14 @@ base class HandoverNote extends Equatable {
     timestamp: TimestampHelper.parseTimestamp(json['timestamp']),
     authorId: json['authorId'] ?? '',
     isAcknowledged: json['isAcknowledged'] ?? false,
+    type: switch (json['type']) {
+      'observation' => NoteType.observation,
+      'incident' => NoteType.incident,
+      'medication' => NoteType.medication,
+      'task' => NoteType.task,
+      'supplyRequest' => NoteType.supplyRequest,
+      _ => NoteType.observation,
+    },
   );
 
   HandoverNote copyWith({
@@ -36,12 +47,14 @@ base class HandoverNote extends Equatable {
     String? authorId,
     List<String>? taggedResidentIds,
     bool? isAcknowledged,
+    NoteType? type,
   }) => HandoverNote._(
     id: id ?? this.id,
     text: text ?? this.text,
     timestamp: timestamp ?? this.timestamp,
     authorId: authorId ?? this.authorId,
     isAcknowledged: isAcknowledged ?? this.isAcknowledged,
+    type: type ?? this.type,
   );
 
   @override

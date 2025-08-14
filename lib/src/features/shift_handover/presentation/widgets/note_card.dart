@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
 import '../../../../base/screens/exports.dart';
+import '../../data/enums/note_type.dart';
 import '../../data/models/handover_note.dart';
 
 final class NoteCard extends StatelessWidget {
@@ -8,8 +9,27 @@ final class NoteCard extends StatelessWidget {
 
   const NoteCard({super.key, required this.note});
 
+  static const Map<NoteType, IconData> _iconMap = {
+    NoteType.observation: Icons.visibility_outlined,
+    NoteType.incident: Icons.warning_amber_rounded,
+    NoteType.medication: Icons.medical_services_outlined,
+    NoteType.task: Icons.check_circle_outline,
+    NoteType.supplyRequest: Icons.shopping_cart_checkout_outlined,
+  };
+
+  static final Map<NoteType, Color> _colorMap = {
+    NoteType.observation: Colors.blue.shade700,
+    NoteType.incident: Colors.red.shade700,
+    NoteType.medication: Colors.purple.shade700,
+    NoteType.task: Colors.green.shade700,
+    NoteType.supplyRequest: Colors.orange.shade700,
+  };
+
   @override
   Widget build(BuildContext context) {
+    final color = _colorMap[note.type] ?? Colors.grey;
+    final icon = _iconMap[note.type] ?? Icons.help_outline;
+
     return Card(
       elevation: 2.0,
       shape: RoundedRectangleBorder(
@@ -21,7 +41,7 @@ final class NoteCard extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 12.0, top: 4.0),
-            child: Icon(Icons.visibility_outlined, color: Colors.blue.shade700, size: 28),
+            child: Icon(icon, color: color, size: 28),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,15 +54,14 @@ final class NoteCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: Colors.blue.shade700.withValues(alpha: 0.1),
+                      color: color.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Text(
-                      'Observation',
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: Colors.blue.shade700,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      note.type.name.toUpperCase(),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.labelMedium?.copyWith(color: color, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Text(

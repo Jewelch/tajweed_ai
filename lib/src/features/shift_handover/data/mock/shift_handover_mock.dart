@@ -14,7 +14,8 @@ Map<String, dynamic> _mockShiftReport({int notesCount = 5}) => {
     for (int index = 0; index < notesCount; index++)
       {
         "id": "note-$index",
-        "text": "Note ${index + 1}",
+        "text": "This is a sample note of type ${_getNoteType(index).name}.",
+        "type": _getNoteType(index).name,
         "timestamp": DateTime.now().subtract(Duration(hours: index)).toIso8601String(),
         "authorId": "caregiver-A",
         "taggedResidentIds": [],
@@ -22,3 +23,8 @@ Map<String, dynamic> _mockShiftReport({int notesCount = 5}) => {
       },
   ],
 };
+
+NoteType _getNoteType(int index) {
+  final types = NoteType.values;
+  return types[index % types.length];
+}
