@@ -8,12 +8,12 @@ import '../widgets/loading_widget.dart';
 import '../widgets/report_view_widget.dart';
 import '../widgets/shift_handover_app_bar.dart';
 
-final class ShiftHandoverScreen extends SubFeature<ShiftHandoverBloc, ShiftHandoverState> {
+final class ShiftHandoverScreen extends Feature<ShiftHandoverBloc, ShiftHandoverState> {
   static final path = "/shift-handover";
 
   ShiftHandoverScreen({super.key})
     : super(
-        dependencies: ShiftHandoverDependencies().inject,
+        dependencies: ShiftHandoverDependencies(),
         // debugStateChanges: true,
         // fullRebuildWhen: (_, currentState) => false,
         // updateWhen: (previous, current) => current is! Loading,
