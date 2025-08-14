@@ -20,7 +20,8 @@ final class ReportViewWidget extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               itemCount: report.notes.length,
               separatorBuilder: (context, index) => const SizedBox(height: 12),
-              itemBuilder: (context, index) => NoteCard(note: report.notes[index]),
+              itemBuilder: (context, index) =>
+                  NoteCard(key: ValueKey(report.notes[index].id), note: report.notes[index]),
             ).expanded(),
     ],
   );

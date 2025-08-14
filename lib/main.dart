@@ -17,9 +17,9 @@ void main() => runZonedGuarded(() async {
 
   runApp(
     const AppWidget(
-      invertOversizedImages: true,
       showMaterialGrid: false,
-      showPerformanceOverlay: true,
+      invertOversizedImages: true,
+      showPerformanceOverlay: false,
     ),
   );
 }, _recordError);

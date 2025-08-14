@@ -13,7 +13,7 @@ final class ShiftHandoverEmptyWidget extends StatelessWidget {
         'No shift report found.',
         style: AppStyles.headline3.bold().withColor(AppColors.greyDark),
       ),
-      // const VerticalSpacing(16),
+      const VerticalSpacing(16),
       ElevatedButton.icon(
         style: ElevatedButton.styleFrom(backgroundColor: AppColors.warning),
         icon: const Icon(Icons.refresh, size: 30),

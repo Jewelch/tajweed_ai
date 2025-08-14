@@ -12,7 +12,7 @@ final class ShiftHandoverErrorWidget extends StatelessWidget {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Text('Failed to load shift report.', style: AppStyles.title),
-      // const VerticalSpacing(16),
+      const VerticalSpacing(16),
       ElevatedButton.icon(
         style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
         icon: const Icon(Icons.refresh, size: 30),

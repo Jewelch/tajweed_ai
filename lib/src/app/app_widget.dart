@@ -1,5 +1,4 @@
 import '../base/screens/exports.dart';
-import '../core/performance/index.dart';
 import 'router/app_router.dart';
 
 class AppWidget extends StatelessWidget {
@@ -20,8 +19,9 @@ class AppWidget extends StatelessWidget {
 
     return MaterialApp.router(
       debugShowMaterialGrid: showMaterialGrid,
+      showPerformanceOverlay: showPerformanceOverlay,
       theme: AppThemes.light,
       routerConfig: router,
-    ).withPerformanceOverlayIf(showPerformanceOverlay);
+    );
   }
 }
