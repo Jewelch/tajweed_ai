@@ -1,1 +1,1 @@
-xcrun simctl push booted com.rides2u.rides2u push_notifications/default_push.json
+xcrun simctl push booted com.nomow.tajweedai push_notifications/default_push.json

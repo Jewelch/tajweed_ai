@@ -1,10 +1,10 @@
 {
     "aps": {
         "alert": {
-            "title": "Your driver is on the way !",
-            "subtitle": "Your driver Chad M. is on his way to you and will be there in approximately 6 minutes."
+            "title": "Tajweed AI",
+            "subtitle": "Tajweed AI is the best tajweed learning app."
         },
-        "sound": "rides2u_notification.wav",
+        "sound": "tajweed_ai_notification.wav",
         "category": "CustomPush",
         "badge": 1,
         "mutable-content": 1
