@@ -15,6 +15,6 @@ class ShiftHandoverDependencies implements Dependencies {
     );
 
     //? Bloc
-    di.registerFactory(() => ShiftHandoverBloc(get()));
+    di.registerInstance(ShiftHandoverBloc(get()));
   }
 }

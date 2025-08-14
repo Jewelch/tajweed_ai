@@ -4,7 +4,7 @@ import '../../../../../../base/screens/exports.dart';
 import '../vm/bloc/note_adding_bloc.dart';
 
 class NoteAddingUC extends SubFeature<NoteAddingBloc> {
-  NoteAddingUC() : super(dependencies: () => di.registerFactory(() => NoteAddingBloc()));
+  NoteAddingUC() : super(dependencies: () => di.registerInstance(NoteAddingBloc()));
 
   @override
   Widget build(BuildContext context) => BlocBuilder<NoteAddingBloc, NoteAddingState>(

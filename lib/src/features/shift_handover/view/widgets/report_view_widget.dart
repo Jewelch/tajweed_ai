@@ -5,7 +5,7 @@ import '../../vm/events/shift_handover_events.dart';
 import 'note_adding/view/add_note_button.dart';
 import 'note_card.dart';
 
-final class ReportViewWidget extends StatelessWidget {
+final class ReportViewWidget extends SubWidget<ShiftHandoverBloc> {
   const ReportViewWidget(this.report, {super.key});
 
   final ShiftReportDO report;
@@ -31,7 +31,7 @@ final class ReportViewWidget extends StatelessWidget {
 
                 NoteAddingUC().symmetricPadding(vertical: 20),
 
-                _AccessHomeButton(context.read<ShiftHandoverBloc>()).customPadding(bottom: 40),
+                _AccessHomeButton().customPadding(bottom: 40),
               ],
             ).expanded(),
     ],
@@ -39,15 +39,10 @@ final class ReportViewWidget extends StatelessWidget {
 }
 
 class _AccessHomeButton extends SubWidget<ShiftHandoverBloc> {
-  const _AccessHomeButton(super.bloc, {super.key});
+  const _AccessHomeButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final sameBloc = get<ShiftHandoverBloc>();
-
-    print('sameBloc: ${sameBloc.hashCode}');
-    print('bloc: ${bloc.hashCode}');
-
     return Observer(
       observes: bloc.isLoadingObs,
       builder: (context, isLoading) => LoadingButton(

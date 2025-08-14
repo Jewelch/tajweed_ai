@@ -94,10 +94,10 @@ class GetItContainer extends DependecyInjectionContainer {
   }
 
   @override
-  T get<T extends Object>() => actor.get<T>();
+  T get<T extends Object>() => actor<T>();
 
   @override
-  T getNamed<T extends Object>(String name) => actor<T>(instanceName: name);
+  T getNamed<T extends Object>(String name) => actor.get<T>(instanceName: name);
 
   @override
   bool isRegistered<T extends Object>({String? name}) => actor.isRegistered<T>(instanceName: name);

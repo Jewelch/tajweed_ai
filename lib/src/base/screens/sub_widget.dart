@@ -3,10 +3,10 @@ import 'exports.dart';
 
 abstract class SubWidget<B extends BaseBloc> extends StatelessWidget {
   /// and current state of the [Bloc].
-  const SubWidget(this.bloc, {super.key});
+  const SubWidget({super.key});
 
   /// con
-  final B bloc;
+  B get bloc => get<B>();
 
   /// Builds the widget's UI based on the current [BuildContext].
   /// You must implement this in subclasses to define the widget's content.

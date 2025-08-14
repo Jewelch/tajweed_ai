@@ -2,7 +2,7 @@ import '../../../../base/screens/exports.dart';
 import '../../vm/bloc/shift_handover_bloc.dart';
 import '../../vm/events/shift_handover_events.dart';
 
-final class ShiftHandoverEmptyWidget extends StatelessWidget {
+final class ShiftHandoverEmptyWidget extends SubWidget<ShiftHandoverBloc> {
   const ShiftHandoverEmptyWidget({super.key});
 
   @override
@@ -18,7 +18,7 @@ final class ShiftHandoverEmptyWidget extends StatelessWidget {
         style: ElevatedButton.styleFrom(backgroundColor: AppColors.warning),
         icon: const Icon(Icons.refresh, size: 30),
         label: Text('Try Again', style: AppStyles.title),
-        onPressed: () => context.read<ShiftHandoverBloc>().add(GetShiftReport('current-user-id')),
+        onPressed: () => bloc.add(GetShiftReport('current-user-id')),
       ),
     ],
   ).symmetricPadding(horizontal: AppMetrics.scaffold.horizontalBodyPadding);
