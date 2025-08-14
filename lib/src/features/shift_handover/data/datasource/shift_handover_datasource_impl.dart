@@ -25,7 +25,7 @@ final class ShiftHandoverDataSourceImpl extends RequestPerformer
 
   @override
   FutureRequestResult<ShiftReportDATO> getShiftReport(String caregiverId) async =>
-      _connectivityMonitor.isConnected && false
+      _connectivityMonitor.isConnected
       ? await performDecodingRequest(
           decodableModel: ShiftReportDATO.empty(),
           method: RestfulMethods.get,
