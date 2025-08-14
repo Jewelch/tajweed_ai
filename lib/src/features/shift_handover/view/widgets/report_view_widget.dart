@@ -1,9 +1,9 @@
 import '../../../../base/dependencies/dependencies.dart';
 import '../../../../base/screens/exports.dart';
 import '../../data/models/shift_report_do.dart';
-import '../../manager/bloc/shift_handover_bloc.dart';
-import '../../manager/events/shift_handover_events.dart';
-import '../../manager/usecases/note_adding_uc/note_adding_bloc.dart';
+import '../../vm/bloc/shift_handover_bloc.dart';
+import '../../vm/events/shift_handover_events.dart';
+import '../../vm/usecases/note_adding_uc/note_adding_bloc.dart';
 import 'note_card.dart';
 
 final class ReportViewWidget extends StatelessWidget {

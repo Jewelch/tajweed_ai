@@ -1,7 +1,7 @@
 import '../../../../base/screens/exports.dart';
-import '../../manager/bloc/shift_handover_bloc.dart';
-import '../../manager/events/shift_handover_events.dart';
-import '../../manager/states/shift_handover_states.dart';
+import '../../vm/bloc/shift_handover_bloc.dart';
+import '../../vm/events/shift_handover_events.dart';
+import '../../vm/states/shift_handover_states.dart';
 
 final class ShiftHandoverAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ShiftHandoverAppBar({super.key});

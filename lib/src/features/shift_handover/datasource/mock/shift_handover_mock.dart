@@ -1,4 +1,4 @@
-part of '../datasource/shift_handover_datasource_impl.dart';
+part of '../shift_handover_datasource_impl.dart';
 
 /// Creates mock shift report data with specific number of notes
 /// [notesCount] - Number of mock notes to generate

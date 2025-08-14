@@ -1,8 +1,8 @@
-import '../../../../core/api/requester_config.dart';
-import '../enums/note_type.dart';
-import '../models/shift_report_do.dart';
+import '../../../base/datasource/exports.dart';
+import '../data/enums/note_type.dart';
+import '../data/models/shift_report_do.dart';
 
-part '../mock/shift_handover_mock.dart';
+part 'mock/shift_handover_mock.dart';
 
 abstract interface class ShiftHandoverDataSource {
   static const String endpoint = "shift-handover";
@@ -11,16 +11,12 @@ abstract interface class ShiftHandoverDataSource {
   FutureRequestResult<ShiftReportDO> getShiftReport(String caregiverId);
 }
 
-final class ShiftHandoverDataSourceImpl extends RequestPerformer
-    implements ShiftHandoverDataSource {
-  final ConnectivityMonitor _connectivityMonitor;
-
+final class ShiftHandoverDataSourceImpl extends DataSource implements ShiftHandoverDataSource {
   ShiftHandoverDataSourceImpl({
-    required Dio client,
-    required CacheManager cacheManager,
-    required ConnectivityMonitor connectivityMonitor,
-  }) : _connectivityMonitor = connectivityMonitor,
-       super(client);
+    required super.client,
+    required super.cacheManager,
+    required super.connectivityMonitor,
+  });
 
   final responseMock = ResponseMock.success;
 

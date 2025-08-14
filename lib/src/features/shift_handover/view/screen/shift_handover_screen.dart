@@ -1,7 +1,7 @@
 import '../../../../base/screens/exports.dart';
 import '../../binding/shift_handover_deps.dart';
-import '../../manager/bloc/shift_handover_bloc.dart';
-import '../../manager/states/shift_handover_states.dart';
+import '../../vm/bloc/shift_handover_bloc.dart';
+import '../../vm/states/shift_handover_states.dart';
 import '../snackbars/_index.dart';
 import '../widgets/empty_state_widget.dart';
 import '../widgets/error_widget.dart';

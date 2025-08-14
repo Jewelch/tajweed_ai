@@ -1,6 +1,6 @@
 import '../../../base/dependencies/dependencies.dart';
-import '../data/datasource/shift_handover_datasource_impl.dart';
-import '../manager/bloc/shift_handover_bloc.dart';
+import '../datasource/shift_handover_datasource_impl.dart';
+import '../vm/bloc/shift_handover_bloc.dart';
 
 class ShiftHandoverDependencies implements Dependencies {
   @override
