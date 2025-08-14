@@ -1,9 +1,8 @@
-import '../../../../base/dependencies/dependencies.dart';
 import '../../../../base/screens/exports.dart';
 import '../../data/models/shift_report_do.dart';
 import '../../vm/bloc/shift_handover_bloc.dart';
 import '../../vm/events/shift_handover_events.dart';
-import '../../vm/usecases/note_adding_uc/note_adding_bloc.dart';
+import 'note_adding/view/add_note_button.dart';
 import 'note_card.dart';
 
 final class ReportViewWidget extends StatelessWidget {
@@ -30,47 +29,33 @@ final class ReportViewWidget extends StatelessWidget {
                       NoteCard(key: ValueKey(report.notes[index].id), note: report.notes[index]),
                 ).expanded(),
 
-                Observer(
-                  observes: context.read<ShiftHandoverBloc>().isLoadingObs,
-                  builder: (context, isLoading) => LoadingButton(
-                    isLoading: isLoading,
-                    title: 'Add Note',
-                    titleFontSize: AppStyles.title.fontSize,
-                    onTap: () => context.read<ShiftHandoverBloc>().add(const AddShiftNote()),
-                  ).customPadding(bottom: 40),
-                ),
+                NoteAddingUC().symmetricPadding(vertical: 20),
 
-                _NoteAddingButton(),
-
-                LoadingButton(
-                  isLoading: false,
-                  title: 'Access Home',
-                  titleFontSize: AppStyles.title.fontSize,
-                  onTap: () => context.read<ShiftHandoverBloc>().add(const AccessHome()),
-                ).customPadding(bottom: 40),
+                _AccessHomeButton(context.read<ShiftHandoverBloc>()).customPadding(bottom: 40),
               ],
             ).expanded(),
     ],
   ).symmetricPadding(horizontal: AppMetrics.scaffold.horizontalBodyPadding);
 }
 
-class NoteAddingDependencies implements Dependencies {
+class _AccessHomeButton extends SubWidget<ShiftHandoverBloc> {
+  const _AccessHomeButton(super.bloc, {super.key});
+
   @override
-  void inject() {
-    di.registerFactory(() => NoteAddingBloc());
+  Widget build(BuildContext context) {
+    final sameBloc = get<ShiftHandoverBloc>();
+
+    print('sameBloc: ${sameBloc.hashCode}');
+    print('bloc: ${bloc.hashCode}');
+
+    return Observer(
+      observes: bloc.isLoadingObs,
+      builder: (context, isLoading) => LoadingButton(
+        isLoading: isLoading,
+        title: 'Access Home',
+        titleFontSize: AppStyles.title.fontSize,
+        onTap: () => bloc.add(const AccessHome()),
+      ),
+    );
   }
-}
-
-class _NoteAddingButton extends Feature<NoteAddingBloc> {
-  _NoteAddingButton() : super(dependencies: NoteAddingDependencies());
-
-  @override
-  Widget build(BuildContext context) => BlocBuilder<NoteAddingBloc, NoteAddingState>(
-    builder: (context, state) => LoadingButton(
-      isLoading: state is Loading,
-      title: 'Add Note',
-      titleFontSize: AppStyles.title.fontSize,
-      onTap: () => context.read<NoteAddingBloc>().add(const AddNote()),
-    ).customPadding(bottom: 40),
-  );
 }

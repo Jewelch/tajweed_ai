@@ -7,10 +7,12 @@ import 'exports.dart';
 ///
 /// Example:
 /// ```dart
-/// class LoginScreen extends Feature<LoginBloc> {
+/// class LoginScreen extends SubFeature<LoginBloc> {
 ///   ProductDetailsScreenEnum({super.key})
 ///      :  super(
-///           dependencies: ProductScreenDependencies(),
+///           dependencies: () {
+///             di.registerFactory(() => SubFeatureBloc());
+///           },
 ///         );
 ///
 ///   @override
@@ -37,14 +39,14 @@ import 'exports.dart';
 /// - `EmptyWidget`: A widget displayed when the state is empty.
 /// - `SuccessWidget`: A widget displayed when the state is successful, typically containing a list of products.
 /// - [dependencies] allows dependency injection
-abstract class Feature<B extends BaseBloc> extends StatefulWidget {
-  /// Creates a [Feature].
+abstract class SubFeature<B extends BaseBloc> extends StatefulWidget {
+  /// Creates a [SubFeature].
   ///
   /// - [dependencies]: Optional. A [Dependencies] instance for lazy or eager dependency injection.
   /// - [lazy]: Whether to create the [Bloc] lazily or eagerly. Defaults to `true` (lazy).
   /// - [buildWhen]: Optional. A function that decides when to rebuild the widget based on the previous
   /// and current state of the [Bloc].
-  Feature({
+  SubFeature({
     super.key,
     this.dependencies,
     this.lazy = true,
@@ -54,7 +56,7 @@ abstract class Feature<B extends BaseBloc> extends StatefulWidget {
     this.debugStateChanges = false,
   });
 
-  final Dependencies? dependencies;
+  final VoidCallback? dependencies;
 
   /// Whether to create the [Bloc] lazily or eagerly. Defaults to `true`.
   final bool lazy;
@@ -72,10 +74,10 @@ abstract class Feature<B extends BaseBloc> extends StatefulWidget {
   /// The [Bloc] provided to the widget.
   B get bloc => _state!.bloc;
 
-  _State<Feature, B>? _state;
+  _State<SubFeature, B>? _state;
 
   @override
-  createState() => _State<Feature, B>();
+  createState() => _State<SubFeature, B>();
 
   /// Builds the widget's UI based on the current [BuildContext].
   /// You must implement this in subclasses to define the widget's content.
@@ -83,7 +85,7 @@ abstract class Feature<B extends BaseBloc> extends StatefulWidget {
   Widget build(BuildContext context);
 }
 
-class _State<T extends Feature, B extends BaseBloc> extends State<T> {
+class _State<T extends SubFeature, B extends BaseBloc> extends State<T> {
   late final B bloc; // Ensures bloc persists
 
   @override
@@ -91,7 +93,7 @@ class _State<T extends Feature, B extends BaseBloc> extends State<T> {
   void initState() {
     super.initState();
     widget._state = this;
-    widget.dependencies?.inject();
+    widget.dependencies?.call();
     bloc = get<B>(); // Initialize bloc only once
   }
 
