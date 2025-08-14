@@ -15,5 +15,11 @@ void main() => runZonedGuarded(() async {
 
   RequesterConfig.configure();
 
-  runApp(const AppWidget());
+  runApp(
+    const AppWidget(
+      invertOversizedImages: true,
+      showMaterialGrid: false,
+      showPerformanceOverlay: true,
+    ),
+  );
 }, _recordError);
