@@ -1,6 +1,6 @@
 // ignore_for_file: unused_element
 
-part of '../shift_handover_bloc.dart';
+part of '../bloc/shift_handover_bloc.dart';
 
 //- ANOTHER EVENTS
 extension on ShiftHandoverBloc {

@@ -1,6 +1,7 @@
 import '../../../../base/dependencies/dependencies.dart';
 import '../../../../base/screens/exports.dart';
-import '../../bloc/shift_handover_bloc.dart';
+import '../../bloc/bloc/shift_handover_bloc.dart';
+import '../../bloc/events/shift_handover_events.dart';
 import '../../bloc/usecases/note_adding_uc/note_adding_bloc.dart';
 import '../../data/models/shift_report_do.dart';
 import 'note_card.dart';
@@ -28,17 +29,25 @@ final class ReportViewWidget extends StatelessWidget {
                   itemBuilder: (context, index) =>
                       NoteCard(key: ValueKey(report.notes[index].id), note: report.notes[index]),
                 ).expanded(),
+
                 Observer(
                   observes: context.read<ShiftHandoverBloc>().isLoadingObs,
                   builder: (context, isLoading) => LoadingButton(
                     isLoading: isLoading,
                     title: 'Add Note',
                     titleFontSize: AppStyles.title.fontSize,
-                    onTap: context.read<ShiftHandoverBloc>().addNote,
+                    onTap: () => context.read<ShiftHandoverBloc>().add(const AddShiftNote()),
                   ).customPadding(bottom: 40),
                 ),
 
                 _NoteAddingButton(),
+
+                LoadingButton(
+                  isLoading: false,
+                  title: 'Access Home',
+                  titleFontSize: AppStyles.title.fontSize,
+                  onTap: () => context.read<ShiftHandoverBloc>().add(const AccessHome()),
+                ).customPadding(bottom: 40),
               ],
             ).expanded(),
     ],

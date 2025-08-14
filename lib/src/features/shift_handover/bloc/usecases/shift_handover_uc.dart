@@ -1,4 +1,4 @@
-part of '../shift_handover_bloc.dart';
+part of '../bloc/shift_handover_bloc.dart';
 
 //- GET SHIFT REPORT
 extension on ShiftHandoverBloc {

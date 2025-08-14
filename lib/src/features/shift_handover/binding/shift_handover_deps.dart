@@ -1,5 +1,5 @@
 import '../../../base/dependencies/dependencies.dart';
-import '../bloc/shift_handover_bloc.dart';
+import '../bloc/bloc/shift_handover_bloc.dart';
 import '../data/datasource/shift_handover_datasource_impl.dart';
 
 class ShiftHandoverDependencies implements Dependencies {
