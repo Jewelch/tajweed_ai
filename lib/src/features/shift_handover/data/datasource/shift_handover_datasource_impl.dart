@@ -22,22 +22,36 @@ final class ShiftHandoverDataSourceImpl extends RequestPerformer
   }) : _connectivityMonitor = connectivityMonitor,
        super(client);
 
+  final responseMock = ResponseMock.success;
+
   @override
-  FutureRequestResult<ShiftReportDO> getShiftReport(String caregiverId) async {
-    return false
-        ? Future.delayed(const Duration(milliseconds: 500), () => Right(ShiftReportDO.empty()))
-        : _connectivityMonitor.isConnected
-        ? await performDecodingRequest(
-            decodableModel: ShiftReportDO.empty(),
-            method: RestfulMethods.get,
-            path: "${ShiftHandoverDataSource.endpoint}/$caregiverId",
-            mockingData: _mockShiftReport(notesCount: AppEnvironment.testing ? 1 : 5),
-            mockIt: true,
-            simulateFailure: false,
-          )
-        : Future.delayed(
-            const Duration(milliseconds: 500),
-            () => Left(Exception('No internet connection')),
-          );
-  }
+  FutureRequestResult<ShiftReportDO> getShiftReport(String caregiverId) async =>
+      switch (responseMock) {
+        //! Failure
+        ResponseMock.failure => Future.delayed(
+          const Duration(milliseconds: 500),
+          () => Left(Exception('Failure')),
+        ),
+        //$ No internet
+        ResponseMock.noInternet => Future.delayed(
+          const Duration(milliseconds: 500),
+          () => Left(Exception('No internet connection')),
+        ),
+        //? No data
+        ResponseMock.noData => Future.delayed(
+          const Duration(milliseconds: 500),
+          () => Right(ShiftReportDO.empty()),
+        ),
+        //+ Success
+        ResponseMock.success => await performDecodingRequest(
+          decodableModel: ShiftReportDO.empty(),
+          method: RestfulMethods.get,
+          path: "${ShiftHandoverDataSource.endpoint}/$caregiverId",
+          mockingData: _mockShiftReport(notesCount: AppEnvironment.testing ? 1 : 5),
+          mockIt: true,
+          simulateFailure: false,
+        ),
+      };
 }
+
+enum ResponseMock { noInternet, noData, success, failure }
