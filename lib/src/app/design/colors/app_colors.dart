@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 abstract final class AppColors {
   static const Color primary = Color.fromRGBO(32, 70, 155, 1);
   static const Color secondary = Color.fromRGBO(32, 70, 155, .7);
-  static const Color accent = Color(0xFFFFB800);
+  static const Color tertiary = Color.fromARGB(255, 81, 76, 133);
 
   static const Color greyDark = Color(0xFF405052);
   static const Color greyMedium = Color(0xFF555555);

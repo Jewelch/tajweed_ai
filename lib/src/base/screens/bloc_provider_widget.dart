@@ -51,6 +51,7 @@ abstract class BlocProviderWidget<B extends BaseBloc> extends StatefulWidget {
     this.listenWhen,
     this.onUpdate,
     this.fullRebuildWhen,
+    this.debugStateChanges = false,
   });
 
   final Dependencies? dependencies;
@@ -64,6 +65,9 @@ abstract class BlocProviderWidget<B extends BaseBloc> extends StatefulWidget {
 
   final void Function(BuildContext, dynamic)? onUpdate;
   final bool Function(BuildContext, dynamic)? fullRebuildWhen;
+
+  /// Whether to print state changes to the console. Defaults to `false`.
+  final bool debugStateChanges;
 
   /// The route path for this screen. Override this in subclasses to provide a custom path.
   /// Defaults to an empty string if not overridden.
@@ -122,9 +126,10 @@ class _State<T extends BlocProviderWidget, B extends BaseBloc> extends State<T> 
           },
           when: widget.fullRebuildWhen?.call(context, state),
         );
-        widget.onUpdate != null
-            ? widget.onUpdate!.call(context, state)
-            : Debugger.cyan('${widget.runtimeType} state: ${state.toString().split('(').first}');
+        if (widget.onUpdate != null) widget.onUpdate!.call(context, state);
+
+        if (widget.debugStateChanges)
+          Debugger.cyan('${widget.runtimeType} state: ${state.toString().split('(').first}');
       },
       child: widget.build(context),
     ),

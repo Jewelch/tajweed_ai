@@ -6,3 +6,4 @@ export './design/styles/app_styles.dart';
 export './design/styles/font_sizes.dart';
 export './design/themes/app_themes.dart';
 export './environment/app_environment.dart';
+export './router/app_messenger.dart';

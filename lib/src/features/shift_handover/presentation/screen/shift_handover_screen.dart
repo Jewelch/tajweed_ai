@@ -2,6 +2,7 @@ import '../../../../base/screens/exports.dart';
 import '../../binding/shift_handover_deps.dart';
 import '../../bloc/shift_handover_bloc.dart';
 import '../../bloc/states/shift_handover_states.dart';
+import '../snackbars/index.dart';
 import '../widgets/empty_state_widget.dart';
 import '../widgets/error_widget.dart';
 import '../widgets/loading_widget.dart';
@@ -14,25 +15,34 @@ final class ShiftHandoverScreen extends BlocProviderWidget<ShiftHandoverBloc> {
   ShiftHandoverScreen({super.key})
     : super(
         dependencies: ShiftHandoverDependencies(),
-        listenWhen: (previous, current) => current is Success,
-        // onUpdate: (context, state) =>
-        //     ScaffoldMessenger.of(context).showSnackBar(SuccessSnackbar(state)),
-        fullRebuildWhen: (_, currentStete) {
-          Debugger.magenta('ShiftHandoverScreen $currentStete');
-          return false;
+        debugStateChanges: true,
+        fullRebuildWhen: (_, currentState) => false,
+        listenWhen: (previous, current) =>
+            current is Success || current is Error || current is Empty,
+        onUpdate: (context, state) => switch (state) {
+          Empty() => appMessenger.showSnackBar(
+            WarningSnackbar(message: "No shift report found", context: context),
+          ),
+          Success() => appMessenger.showSnackBar(
+            SuccessSnackbar(state.shiftReport.notes, context: context),
+          ),
+          Error() => appMessenger.showSnackBar(
+            FailureSnackbar(message: state.message, context: context),
+          ),
+          _ => null,
         },
       );
 
   @override
   Widget build(BuildContext context) {
-    Debugger.white('ShiftHandoverScreen rebuilt');
+    Debugger.black('ShiftHandoverScreen rebuilt');
 
     return Scaffold(
       appBar: const ShiftHandoverAppBar(),
       body: BlocBuilder<ShiftHandoverBloc, ShiftHandoverState>(
         builder: (context, state) => switch (state) {
           Loading() => const LoadingWidget(),
-          Error() => ShiftHandoverErrorWidget("state.message"),
+          Error() => ShiftHandoverErrorWidget(state.message),
           Empty() => const ShiftHandoverEmptyWidget(),
           Success() => ReportViewWidget(state.shiftReport),
         },

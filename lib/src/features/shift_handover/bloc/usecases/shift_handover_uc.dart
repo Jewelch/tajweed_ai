@@ -10,16 +10,14 @@ extension on ShiftHandoverBloc {
         .then(
           (result) => result.fold(
             (exception) => _handleShiftHandoverFailure(exception, emit),
-            (ShiftReportDO shiftReport) => _handleLoadShiftReport(shiftReport, emit),
+            (shiftReport) => _handleLoadShiftReport(shiftReport, emit),
           ),
         );
   }
 
-  void _handleShiftHandoverFailure(Exception exception, Emitter<ShiftHandoverState> emit) {
-    ScaffoldMessenger.of(globalContext).showSnackBar(FailureSnackbar(exception: exception));
-    emit(Error.from(exception));
-  }
+  void _handleShiftHandoverFailure(Exception exception, Emitter<ShiftHandoverState> emit) =>
+      emit(Error.from(exception));
 
-  void _handleLoadShiftReport(ShiftReportDO? shiftReport, Emitter<ShiftHandoverState> emit) =>
-      (shiftReport == null) ? emit(Empty()) : emit(Success(shiftReport: shiftReport));
+  void _handleLoadShiftReport(ShiftReportDO shiftReport, Emitter<ShiftHandoverState> emit) =>
+      emit(shiftReport.notes.isEmpty ? Empty() : Success(shiftReport: shiftReport));
 }

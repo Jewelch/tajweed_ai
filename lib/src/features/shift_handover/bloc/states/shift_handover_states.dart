@@ -23,9 +23,9 @@ final class Success extends ShiftHandoverState {
 final class Error extends ShiftHandoverState implements Exception {
   final String message;
 
-  Error({Exception? exception}) : message = exception?.toString() ?? '';
+  Error._(this.message);
 
-  factory Error.from(Exception exception) => Error(exception: exception);
+  factory Error.from(Exception exception) => Error._(exception.toString());
 
   @override
   List<Object> get props => [message];

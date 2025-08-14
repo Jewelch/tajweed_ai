@@ -13,6 +13,8 @@ final class AppThemes {
       primary: AppColors.primary,
       secondary: AppColors.secondary,
       shadow: AppColors.shadow,
+      tertiary: AppColors.warning,
+      error: AppColors.error,
     ),
     scaffoldBackgroundColor: AppColors.scaffold,
 
@@ -148,7 +150,7 @@ final class AppThemes {
     //! Checkbox
     checkboxTheme: CheckboxThemeData(
       checkColor: WidgetStateProperty.all(AppColors.primary),
-      fillColor: WidgetStateProperty.all(AppColors.accent),
+      fillColor: WidgetStateProperty.all(AppColors.tertiary),
       side: const BorderSide(color: AppColors.primary),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
     ),

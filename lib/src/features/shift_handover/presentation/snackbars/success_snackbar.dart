@@ -1,12 +1,12 @@
-import '../../../../base/screens/exports.dart';
-import '../../bloc/states/shift_handover_states.dart';
+import '../../../../app/router/app_messenger.dart';
+import '../../data/models/handover_note.dart';
 
-class SuccessSnackbar extends SnackBar {
-  final Success state;
+class SuccessSnackbar extends CommonSnackbar {
+  final List<HandoverNote> handoverNotes;
 
-  SuccessSnackbar(this.state, {super.key})
+  SuccessSnackbar(this.handoverNotes, {required super.context})
     : super(
-        content: Text("successfully loaded ${state.shiftReport.notes.length} notes"),
-        backgroundColor: Theme.of(globalContext).colorScheme.primary,
+        message: "successfully loaded ${handoverNotes.length} notes",
+        type: SnackbarType.success,
       );
 }

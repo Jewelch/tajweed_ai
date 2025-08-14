@@ -1,5 +1,3 @@
-// ignore_for_file: dead_code
-
 import '../../../../core/api/requester_config.dart';
 import '../enums/note_type.dart';
 import '../models/shift_report_do.dart';
@@ -25,8 +23,9 @@ final class ShiftHandoverDataSourceImpl extends RequestPerformer
        super(client);
 
   @override
-  FutureRequestResult<ShiftReportDO> getShiftReport(String caregiverId) async =>
-      _connectivityMonitor.isConnected
+  FutureRequestResult<ShiftReportDO> getShiftReport(String caregiverId) async => true
+      ? Right(ShiftReportDO.empty())
+      : _connectivityMonitor.isConnected
       ? await performDecodingRequest(
           decodableModel: ShiftReportDO.empty(),
           method: RestfulMethods.get,

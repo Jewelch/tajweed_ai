@@ -33,5 +33,5 @@ extension TextStyleExt on TextStyle {
   TextStyle dark() => copyWith(color: AppColors.black);
   TextStyle primary() => copyWith(color: AppColors.primary);
   TextStyle secondary() => copyWith(color: AppColors.secondary);
-  TextStyle accent() => copyWith(color: AppColors.accent);
+  TextStyle tertiary() => copyWith(color: AppColors.tertiary);
 }

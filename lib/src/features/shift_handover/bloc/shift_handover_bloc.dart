@@ -1,7 +1,6 @@
 import '../../../base/bloc/exports.dart';
 import '../data/datasource/shift_handover_datasource_impl.dart';
 import '../data/models/shift_report_do.dart';
-import '../presentation/snackbars/failure_snackbar.dart';
 import 'events/shift_handover_events.dart';
 import 'states/shift_handover_states.dart';
 
@@ -12,7 +11,7 @@ part 'usecases/shift_handover_uc.dart';
 class ShiftHandoverBloc extends BaseBloc<ShiftHandoverEvent, ShiftHandoverState> {
   final ShiftHandoverDataSource shiftHandoverDataSource;
 
-  ShiftHandoverBloc(this.shiftHandoverDataSource) : super(Loading(), debugginEnabled: false) {
+  ShiftHandoverBloc(this.shiftHandoverDataSource) : super(Loading(), debugginEnabled: true) {
     on<GetShiftReport>(_loadShiftReport);
   }
 
@@ -25,6 +24,6 @@ class ShiftHandoverBloc extends BaseBloc<ShiftHandoverEvent, ShiftHandoverState>
 
   //+ SHARED METHODS
   void accessHome() {
-    Debugger.white('ShiftHandoverBloc accessHome');
+    Debugger.white('$ShiftHandoverBloc is accessing home');
   }
 }

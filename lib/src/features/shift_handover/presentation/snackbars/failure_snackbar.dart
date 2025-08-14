@@ -1,11 +1,12 @@
 import '../../../../base/screens/exports.dart';
+import '../../bloc/events/shift_handover_events.dart';
+import '../../bloc/shift_handover_bloc.dart';
 
-class FailureSnackbar extends SnackBar {
-  final Exception exception;
-
-  FailureSnackbar({super.key, required this.exception})
+class FailureSnackbar extends CommonSnackbar {
+  FailureSnackbar({required super.context, required super.message})
     : super(
-        content: Text('An error occurred: ${exception.toString()}'),
-        backgroundColor: Theme.of(globalContext).colorScheme.error,
+        type: SnackbarType.error,
+        actionTitle: 'Retry',
+        onActionPressed: () => context.read<ShiftHandoverBloc>().add(GetShiftReport("3")),
       );
 }
