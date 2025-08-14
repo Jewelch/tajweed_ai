@@ -39,7 +39,7 @@ import 'exports.dart';
 /// - `EmptyWidget`: A widget displayed when the state is empty.
 /// - `SuccessWidget`: A widget displayed when the state is successful, typically containing a list of products.
 /// - [dependencies] allows dependency injection
-abstract class SubFeature<B extends BaseBloc> extends StatefulWidget {
+abstract class SubFeature<B extends BaseBloc<dynamic, S>, S> extends StatefulWidget {
   /// Creates a [SubFeature].
   ///
   /// - [dependencies]: Optional. A [Dependencies] instance for lazy or eager dependency injection.
@@ -74,18 +74,18 @@ abstract class SubFeature<B extends BaseBloc> extends StatefulWidget {
   /// The [Bloc] provided to the widget.
   B get bloc => _state!.bloc;
 
-  _State<SubFeature, B>? _state;
+  _State<B, S>? _state;
 
   @override
-  createState() => _State<SubFeature, B>();
+  createState() => _State<B, S>();
 
   /// Builds the widget's UI based on the current [BuildContext].
   /// You must implement this in subclasses to define the widget's content.
   @protected
-  Widget build(BuildContext context);
+  Widget build(BuildContext context, S state);
 }
 
-class _State<T extends SubFeature, B extends BaseBloc> extends State<T> {
+class _State<B extends BaseBloc<dynamic, S>, S> extends State<SubFeature> {
   late final B bloc; // Ensures bloc persists
 
   @override
@@ -98,7 +98,7 @@ class _State<T extends SubFeature, B extends BaseBloc> extends State<T> {
   }
 
   @override
-  void didUpdateWidget(covariant T oldWidget) {
+  void didUpdateWidget(covariant SubFeature oldWidget) {
     super.didUpdateWidget(oldWidget);
     widget._state = this;
   }
@@ -112,10 +112,10 @@ class _State<T extends SubFeature, B extends BaseBloc> extends State<T> {
 
   @override
   @protected
-  Widget build(BuildContext context) => BlocProvider<B>(
-    create: (_) => bloc,
-    lazy: widget.lazy,
-    child: BlocListener<B, dynamic>(
+  Widget build(BuildContext context) => BlocConsumer<B, S>(
+    bloc: bloc,
+    builder: widget.build,
+    listener: (context, state) => BlocListener<B, dynamic>(
       listenWhen: widget.updateWhen,
       listener: (context, state) {
         setState.execute(
@@ -129,7 +129,6 @@ class _State<T extends SubFeature, B extends BaseBloc> extends State<T> {
         if (widget.debugStateChanges)
           Debugger.cyan('${widget.runtimeType} state: ${state.toString().split('(').first}');
       },
-      child: widget.build(context),
     ),
   );
 }
